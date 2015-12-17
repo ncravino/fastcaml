@@ -46,8 +46,18 @@ module Vlist = struct
   	| L lst -> loop init lst.data lst.next lst.offset
 
   let of_list l =
-	  List.fold_left (fun acc e -> cons e acc) empty (List.rev l)
+	List.fold_left (fun acc e -> cons e acc) empty (List.rev l)
+  
+  let of_rep_elem elem count =
+  	let rec loop acc counter =
+		if counter > 0 then
+			loop (cons elem acc) (counter - 1)
+		else
+			acc
+	in
+	loop empty count	  
 end
 (*simple testing *)
 let lll= Vlist.of_list [1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18];;
 let x = Vlist.(head (tail lll));;
+let megalst = Vlist.of_rep_elem 1 10_000_000;;

@@ -1,7 +1,10 @@
 module Vlist = struct
+  
   type 'a header = {data : 'a array; offset:int;next : 'a t} and 'a t = L of 'a header | Nil
+  
   let empty = Nil
-  let rec cons elem list = 
+  
+  let cons elem list = 
     match list with
     |Nil -> let data = Array.make 8 elem in
       L {data;offset=0;next=Nil}
